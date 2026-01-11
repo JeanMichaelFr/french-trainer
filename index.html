@@ -200,6 +200,13 @@ TENSE_KEYS.forEach(t => enabledTenses[t] = true);
 let verbList = [];
 let verbIndex = 0;
 let showTranslation = false;
+const tr = VERBS[currentVerb]?.en;
+if(showTranslation && tr){
+    wordEl.textContent += ` — ${tr}`;
+}
+function isMobile() {
+    return window.innerWidth <= 768;
+}
 
 
 
@@ -482,9 +489,10 @@ function updateQuestion(){
 
     // ✅ English translation from verbs.json
     const tr = VERBS[currentVerb]?.en;
-    if(showTranslation && tr){
-        wordEl.textContent += ` — ${tr}`;
-    }
+    if ((showTranslation || isMobile()) && tr) {
+    wordEl.textContent += ` — ${tr}`;
+}
+
 
     answerEl.value = "";
     resultEl.textContent = "";
@@ -763,6 +771,34 @@ window.onload = loadVerbs;
 if ("serviceWorker" in navigator) {
   navigator.serviceWorker.register("service-worker.js");
 }
+
+
+</script>
+<script>
+/* ========= MOBILE TAP NAVIGATION ========= */
+
+document.addEventListener("click", function (e) {
+    // Ignore clicks on buttons / inputs
+    if (
+        e.target.tagName === "BUTTON" ||
+        e.target.tagName === "INPUT" ||
+        e.target.tagName === "SELECT" ||
+        e.target.closest("button")
+    ) {
+        return;
+    }
+
+    const screenWidth = window.innerWidth;
+    const tapX = e.clientX;
+
+    if (tapX < screenWidth / 2) {
+        // LEFT SIDE → previous verb
+        prevVerb();
+    } else {
+        // RIGHT SIDE → next verb
+        nextVerb();
+    }
+});
 </script>
 
 
