@@ -779,25 +779,13 @@ if ("serviceWorker" in navigator) {
 <script>
 /* ========= MOBILE TAP NAVIGATION ========= */
 
-document.addEventListener("click", function (e) {
-    // Ignore clicks on buttons / inputs
-    if (
-        e.target.tagName === "BUTTON" ||
-        e.target.tagName === "INPUT" ||
-        e.target.tagName === "SELECT" ||
-        e.target.closest("button")
-    ) {
-        return;
-    }
+document.addEventListener("pointerdown", function (e) {
+    if (e.pointerType !== "touch") return;
+    if (e.target.closest("button, input, select")) return;
 
-    const screenWidth = window.innerWidth;
-    const tapX = e.clientX;
-
-    if (tapX < screenWidth / 2) {
-        // LEFT SIDE → previous verb
+    if (e.clientX < window.innerWidth / 2) {
         prevVerb();
     } else {
-        // RIGHT SIDE → next verb
         nextVerb();
     }
 });
