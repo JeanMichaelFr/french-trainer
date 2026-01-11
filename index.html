@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#2c3e50">
+
+<title>French Conjugation Trainer</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background:#f4f4f4;
+    padding:20px;
+}
+.box {
+    background:white;
+    max-width:800px;
+    margin:auto;
+    padding:20px;
+    border-radius:12px;
+    box-shadow:0 0px 10px rgba(0,0,0,0.15);
+}
+.small-play {
+    padding: 4px 6px;
+    font-size: 12px;
+    line-height: 1;
+}
+
+h2 { text-align:center; }
+select, button, input {
+    padding:10px;
+    margin:6px;
+    font-size:16px;
+}
+#word {
+    font-size:28px;
+    text-align:center;
+    margin:20px 0;
+}
+.center { text-align:center; }
+.compare {
+    color:#555;
+    font-size:15px;
+}
+.panel {
+    background:#f9f9f9;
+    border:1px solid #ccc;
+    border-radius:8px;
+    padding:15px;
+    margin-top:15px;
+    font-size:15px;
+}
+.panel h3 { margin-top:0; }
+</style>
+</head>
+
+<body>
+
+<div class="box">
+<h2>🇫🇷 French Conjugation Trainer</h2>
+
+<div class="center">
+<select id="group"></select>
+<select id="tense"></select>
+<button onclick="start()">▶ Start</button>
+<button onclick="toggleSound()" id="soundBtn">🔊 Sound ON</button>
+<button onclick="toggleAutoCycle()" id="cycleBtn">🔁 Auto OFF</button>
+<button onclick="toggleCompare()">📊 Compare Tenses</button>
+<button onclick="toggleConjugation()">📚 Conjugation</button>
+<button onclick="toggleCheckFiles()">📁 Check file</button>
+<button onclick="toggleCheckWord()">🔎 Check word</button>
+
+
+
+</div>
+
+
+<div id="comparePanel" class="panel" style="display:none">
+    <h3>Compare tenses – <span id="comparePronoun"></span></h3>
+    <div id="tenseToggles"></div>
+    <div id="compareResults"></div>
+</div>
+<div id="conjugationBox" class="panel" style="display:none">
+    <h3>
+        Conjugation – 
+        <span id="conjVerb"></span> · 
+        <span id="conjTense"></span>
+    </h3>
+
+    <button onclick="toggleAutoPronoun()" id="autoPronounBtn">
+        🔁 Auto Tense OFF
+    </button>
+
+    <div id="conjugationResults"></div>
+</div>
+<div id="checkFilesPanel" class="panel" style="display:none">
+  <h3>Connected JSON files</h3>
+  <p><b>Loaded files:</b></p>
+  <ul id="fileList"></ul>
+
+  <input id="fileSearch" placeholder="Search infinitive in this file">
+  <p id="fileSearchResult"></p>
+
+  <p><b>All infinitives:</b></p>
+  <textarea id="verbListArea" rows="6" style="width:100%"></textarea>
+</div>
+
+<div id="checkWordPanel" class="panel" style="display:none">
+  <h3>Search word in all files</h3>
+
+  <input id="globalSearch" placeholder="Type verb infinitive or English">
+<div id="suggestions" style="border:1px solid #ccc; display:none; background:#fff"></div>
+<button onclick="useCheckedWord()">That’ll do</button>
+
+
+  <p id="globalSearchResult"></p>
+</div>
+
+
+
+
+
+<p id="word"></p>
+<p class="center compare" id="compareInfo"></p>
+
+<div class="center">
+<input id="answer" placeholder="Type answer">
+<br>
+<button onclick="check()">Check</button>
+</div>
+
+<p class="center" id="result"></p>
+<p class="center">Score: <span id="score">0</span></p>
+</div>
+<div id="verbTimeline" class="center" style="margin-top:20px;color:#777;font-size:14px"></div>
+
+
+
+<script>
+// =====================
+// CONSTANT DATA
+// =====================
+const PRONOUNS = ["je","tu","il","nous","vous","ils"];
+
+const AUXILIARIES = {
+    avoir:{
+        present:{je:"ai",tu:"as",il:"a",nous:"avons",vous:"avez",ils:"ont"},
+        imparfait:{je:"avais",tu:"avais",il:"avait",nous:"avions",vous:"aviez",ils:"avaient"},
+        conditional:{je:"aurais",tu:"aurais",il:"aurait",nous:"aurions",vous:"auriez",ils:"auraient"}
+    },
+    etre:{
+        present:{je:"suis",tu:"es",il:"est",nous:"sommes",vous:"êtes",ils:"sont"},
+        imparfait:{je:"étais",tu:"étais",il:"était",nous:"étions",vous:"étiez",ils:"étaient"},
+        conditional:{je:"serais",tu:"serais",il:"serait",nous:"serions",vous:"seriez",ils:"seraient"}
+    }
+};
+
+const REFLEXIVE_PRONOUNS = {
+    je:"me", tu:"te", il:"se", nous:"nous", vous:"vous", ils:"se"
+};
+
+const TENSES = {
+    present:{label:"Présent",type:"simple"},
+    imparfait:{label:"Imparfait",type:"simple"},
+    future:{label:"Futur simple",type:"simple"},
+    conditional:{label:"Conditionnel présent",type:"simple"},
+    subjonctif_present:{label:"Subjonctif présent",type:"simple"},
+    passe_compose:{label:"Passé composé",type:"compound",auxTense:"present"},
+    plus_que_parfait:{label:"Plus-que-parfait",type:"compound",auxTense:"imparfait"},
+    conditional_past:{label:"Conditionnel passé",type:"compound",auxTense:"conditional"},
+    futur_proche:{label:"Futur proche",type:"periphrastic"},
+    passive:{label:"Passive voice",type:"passive",auxTense:"present"}
+};
+
+const TENSE_KEYS = Object.keys(TENSES);
+
+// =====================
+// STATE
+// =====================
+
+let autoPronoun = false;
+let autoPronounTimer = null;
+let autoPronounIndex = 0;
+let VERBS = {};
+let VOCAB_GROUPS = {};
+let currentVerb = "";
+let currentPronoun = "";
+let currentTense = "";
+let currentAnswer = "";
+let compareIndex = 0;
+let autoCycle = false;
+let cycleTimer = null;
+let score = 0;
+let soundOn = true;
+let compareVisible = false;
+let enabledTenses = {};
+TENSE_KEYS.forEach(t => enabledTenses[t] = true);
+let verbList = [];
+let verbIndex = 0;
+let showTranslation = false;
+
+
+
+let conjugationVisible = false;
+
+function toggleConjugation(){
+    conjugationVisible = !conjugationVisible;
+    document.getElementById("conjugationBox").style.display =
+        conjugationVisible ? "block" : "none";
+
+    if(conjugationVisible) renderConjugation();
+}
+
+function normalizeSearchInput(s){
+    return normalize(s.replace(/^to\s+/i, ""));
+}
+
+
+// ------------------------------------
+// Find matches (French + English, partial)
+// --------------------------------------
+
+
+function findMatches(query){
+    const q = normalizeSearchInput(query);
+    if(!q) return [];
+
+    return Object.keys(VERBS).filter(v => {
+        const fr = normalize(v);
+        const en = VERBS[v].en ? normalize(VERBS[v].en) : "";
+
+        return fr.startsWith(q) || en.includes(q);
+    });
+}
+
+
+
+function renderConjugation(){
+    if(!currentVerb) return;
+
+    document.getElementById("conjVerb").textContent = currentVerb;
+    document.getElementById("conjTense").textContent = TENSES[currentTense].label;
+
+    const box = document.getElementById("conjugationResults");
+    box.innerHTML = "";
+
+    PRONOUNS.forEach((p, i) => {
+        const ans = buildAnswer(currentVerb, currentTense, p);
+        const line = applyElision(p, ans);
+
+        const row = document.createElement("div");
+        row.style.display = "flex";
+        row.style.alignItems = "center";
+        row.style.gap = "10px";
+        row.style.marginBottom = "6px";
+
+        row.innerHTML = `
+            <button class="small-play" onclick="playConjugation(${i})">▶</button>
+            <span id="conj-check-${i}">⬜</span>
+            <span><b>${p}</b> : ${line}</span>
+        `;
+
+        box.appendChild(row);
+    });
+}
+
+function playConjugation(index){
+    const p = PRONOUNS[index];
+    const ans = buildAnswer(currentVerb, currentTense, p);
+    const text = applyElision(p, ans);
+
+    speak(text);
+
+    const mark = document.getElementById(`conj-check-${index}`);
+    if(mark) mark.textContent = "✅";
+}
+
+
+function toggleAutoPronoun(){
+    autoPronoun = !autoPronoun;
+    const btn = document.getElementById("autoPronounBtn");
+    btn.textContent = autoPronoun ? "🔁 Auto Tense ON" : "🔁 Auto Tense OFF";
+
+    if(autoPronoun){
+        autoPronounIndex = 0;
+        autoPronounTimer = setInterval(runAutoPronoun, 1800);
+    } else {
+        clearInterval(autoPronounTimer);
+    }
+}
+
+function runAutoPronoun(){
+    if(!conjugationVisible){
+        toggleAutoPronoun();
+        return;
+    }
+
+    playConjugation(autoPronounIndex);
+    autoPronounIndex = (autoPronounIndex + 1) % PRONOUNS.length;
+}
+
+
+function renderVerbTimeline(){
+    if(!verbList.length) return;
+
+    const before = verbList.slice(
+        Math.max(0, verbIndex - 3),
+        verbIndex
+    );
+
+    const after = verbList.slice(
+        verbIndex + 1,
+        verbIndex + 4
+    );
+
+    document.getElementById("verbTimeline").innerHTML = `
+        ${before.join(" · ")}
+        <b> ... </b>
+        ${after.join(" · ")}
+    `;
+}
+
+
+// =====================
+// DOM
+// =====================
+const tenseSelect = document.getElementById("tense");
+const groupSelect = document.getElementById("group");
+const wordEl = document.getElementById("word");
+const answerEl = document.getElementById("answer");
+const resultEl = document.getElementById("result");
+const scoreEl = document.getElementById("score");
+const soundBtn = document.getElementById("soundBtn");
+const cycleBtn = document.getElementById("cycleBtn");
+const comparePanel = document.getElementById("comparePanel");
+
+// Populate tenses
+TENSE_KEYS.forEach(k=>{
+    const o=document.createElement("option");
+    o.value=k;
+    o.textContent=TENSES[k].label;
+    tenseSelect.appendChild(o);
+});
+
+// =====================
+// HELPERS
+// =====================
+const rand = a => a[Math.floor(Math.random()*a.length)];
+const normalize = s =>
+    s.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").trim();
+
+function applyElision(pronoun, phrase) {
+    if (pronoun === "je" && /^[aeiouh]/i.test(phrase)) {
+        return "j’" + phrase;
+    }
+    return pronoun + " " + phrase;
+}
+
+
+// =====================
+// HELPER
+// =====================
+
+
+
+
+// =====================
+// AUDIO
+// =====================
+function speak(text){
+    if(!soundOn) return;
+    speechSynthesis.cancel();
+    const u=new SpeechSynthesisUtterance(text);
+    u.lang="fr-FR";
+    setTimeout(()=>speechSynthesis.speak(u),50);
+}
+
+function toggleSound(){
+    soundOn=!soundOn;
+    soundBtn.textContent=soundOn?"🔊 Sound ON":"🔇 Sound OFF";
+}
+
+function normalizeAux(aux) {
+    return aux
+        .toLowerCase()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "");
+}
+
+// =====================
+// ANSWER BUILDER
+// =====================
+function buildAnswer(v, t, p) {
+    const verb = VERBS[v];
+    const tense = TENSES[t];
+    if (!verb) return "—";
+
+    // Reflexive verbs
+    if (verb.reflexive) {
+        const base = VERBS[verb.base];
+        if (!base) return "—";
+
+        if (tense.type === "simple") {
+            return `${REFLEXIVE_PRONOUNS[p]} ${base[t][p]}`;
+        }
+
+        if (tense.type === "compound") {
+            return `${REFLEXIVE_PRONOUNS[p]} ${AUXILIARIES.etre[tense.auxTense][p]} ${verb.pp}`;
+        }
+    }
+
+    // Simple
+    if (tense.type === "simple") {
+        return verb[t]?.[p] ?? "—";
+    }
+
+    // Compound
+    if (tense.type === "compound") {
+       return `${AUXILIARIES[normalizeAux(verb.aux)][tense.auxTense][p]} ${verb.pp}`;
+
+
+    }
+
+    // Futur proche
+    if (tense.type === "periphrastic") {
+        return verb.reflexive
+            ? `${VERBS.aller.present[p]} ${REFLEXIVE_PRONOUNS[p]} ${verb.base}`
+            : `${VERBS.aller.present[p]} ${v}`;
+    }
+
+    // Passive
+    if (tense.type === "passive") {
+        return `${AUXILIARIES.etre[tense.auxTense][p]} ${verb.pp}`;
+    }
+
+    return "—";
+}
+
+// =====================
+// GAME FLOW
+// =====================
+function start(){
+    const group = VOCAB_GROUPS[groupSelect.value];
+    if (!group) return;
+
+    verbList = group.verbs;
+	verbIndex = Math.floor(Math.random() * verbList.length);
+	currentVerb = verbList[verbIndex];
+
+    currentPronoun = rand(PRONOUNS);
+    currentTense = tenseSelect.value;
+    compareIndex = TENSE_KEYS.indexOf(currentTense);
+    updateQuestion();
+}
+
+
+function prevVerb(){
+    if(!verbList.length) return;
+    verbIndex = (verbIndex - 1 + verbList.length) % verbList.length;
+    currentVerb = verbList[verbIndex];
+    updateQuestion();
+}
+
+function nextVerb(){
+    if(!verbList.length) return;
+    verbIndex = (verbIndex + 1) % verbList.length;
+    currentVerb = verbList[verbIndex];
+    updateQuestion();
+}
+
+
+function updateQuestion(){
+    if(!currentVerb) return;
+
+    currentAnswer = buildAnswer(currentVerb, currentTense, currentPronoun);
+    const phrase = applyElision(currentPronoun, currentAnswer);
+
+    wordEl.textContent =
+        `${phrase.replace(currentAnswer,"____")} (${currentVerb}) [${TENSES[currentTense].label}]`;
+
+    // ✅ English translation from verbs.json
+    const tr = VERBS[currentVerb]?.en;
+    if(showTranslation && tr){
+        wordEl.textContent += ` — ${tr}`;
+    }
+
+    answerEl.value = "";
+    resultEl.textContent = "";
+    speak(phrase);
+
+    if(conjugationVisible) renderConjugation();
+    if(compareVisible) renderCompare();
+    renderVerbTimeline();
+}
+
+
+
+
+function check(){
+    if(normalize(answerEl.value)===normalize(currentAnswer)){
+        score++;
+        resultEl.textContent="✅ Correct";
+    } else {
+        resultEl.textContent="❌ "+currentAnswer;
+    }
+    scoreEl.textContent=score;
+    setTimeout(start,1200);
+}
+
+
+function toggleCompare(){
+    compareVisible = !compareVisible;
+    comparePanel.style.display = compareVisible ? "block" : "none";
+    if(compareVisible) renderCompare();
+}
+
+function renderCompare(){
+    if(!currentVerb) return;
+
+    document.getElementById("comparePronoun").textContent = currentPronoun;
+
+    // Tense checkboxes
+    const toggleBox = document.getElementById("tenseToggles");
+    toggleBox.innerHTML = "";
+
+    TENSE_KEYS.forEach(t=>{
+        const label = document.createElement("label");
+        label.style.display = "inline-block";
+        label.style.marginRight = "10px";
+
+        const cb = document.createElement("input");
+        cb.type = "checkbox";
+        cb.checked = enabledTenses[t];
+        cb.onchange = () => {
+            enabledTenses[t] = cb.checked;
+            renderCompare();
+        };
+
+        label.appendChild(cb);
+        label.append(" " + TENSES[t].label);
+        toggleBox.appendChild(label);
+    });
+
+    // Results
+    const res = document.getElementById("compareResults");
+    res.innerHTML = "";
+
+    TENSE_KEYS.forEach(t=>{
+        if(!enabledTenses[t]) return;
+        const ans = buildAnswer(currentVerb,t,currentPronoun);
+        res.innerHTML += `<p><b>${TENSES[t].label}:</b> ${applyElision(currentPronoun, ans)}</p>`;
+    });
+}
+
+
+
+
+
+function toggleAutoCycle(){
+    autoCycle = !autoCycle;
+    cycleBtn.textContent = autoCycle ? "🔁 Auto ON" : "🔁 Auto OFF";
+
+    if(autoCycle){
+        cycleTimer = setInterval(cycleTense,3000);
+    } else {
+        clearInterval(cycleTimer);
+    }
+}
+
+function cycleTense(){
+    if(!currentVerb) return;
+    compareIndex = (compareIndex + 1) % TENSE_KEYS.length;
+    currentTense = TENSE_KEYS[compareIndex];
+    updateQuestion();
+}
+
+// =====================
+// KEYBOARD
+// =====================
+document.addEventListener("keydown",e=>{
+    const k=e.key.toLowerCase();
+    if(k==="enter") check();
+    if(k==="arrowup"){e.preventDefault(); speak(applyElision(currentPronoun,currentAnswer));}
+    if(k==="arrowdown"){e.preventDefault(); cycleTense();}
+if(e.key === "ArrowLeft"){
+    e.preventDefault();
+    prevVerb();
+}
+   
+if(e.key === "ArrowRight"){
+    e.preventDefault();
+    nextVerb();
+}
+if(e.key === "?"){
+    showTranslation = !showTranslation;
+    updateQuestion();
+}
+const n = Number(e.key);
+if(conjugationVisible && n >= 1 && n <= 6){
+    e.preventDefault();
+    playConjugation(n - 1);
+}
+
+
+});
+
+
+
+
+// =====================
+// LOAD VERBS
+// =====================
+async function loadVerbs(){
+    try{
+        const res = await fetch("verbs.json");
+        if(!res.ok) throw new Error("load error");
+        const raw = await res.json();
+
+        VERBS = raw;
+
+        VOCAB_GROUPS = {
+            all:{label:"All verbs",verbs:Object.keys(VERBS)},
+            A2:{label:"A2",verbs:Object.keys(VERBS).filter(v=>VERBS[v].level?.includes("A2"))},
+            B1:{label:"B1",verbs:Object.keys(VERBS).filter(v=>VERBS[v].level?.includes("B1"))}
+        };
+
+        Object.keys(VOCAB_GROUPS).forEach(k=>{
+            const o=document.createElement("option");
+            o.value=k;
+            o.textContent=VOCAB_GROUPS[k].label;
+            groupSelect.appendChild(o);
+        });
+
+        groupSelect.value="all";
+        start();
+    } catch(e){
+        alert("Failed to load verbs.json");
+    }
+}
+
+// =====================
+// CHECK FILE / CHECK WORD
+// =====================
+
+let checkFilesVisible = false;
+let checkWordVisible = false;
+
+// Toggle "Check file"
+function toggleCheckFiles(){
+    checkFilesVisible = !checkFilesVisible;
+    document.getElementById("checkFilesPanel").style.display =
+        checkFilesVisible ? "block" : "none";
+
+    if(checkFilesVisible){
+        renderCheckFiles();
+    }
+}
+
+// Toggle "Check word"
+function toggleCheckWord(){
+    checkWordVisible = !checkWordVisible;
+    document.getElementById("checkWordPanel").style.display =
+        checkWordVisible ? "block" : "none";
+}
+
+function useCheckedWord(){
+    const input = document.getElementById("globalSearch");
+    const matches = findMatches(input.value);
+
+    if(matches.length === 0){
+        alert("Word not found (French or English)");
+        return;
+    }
+
+    startFromFoundVerb(matches[0]);
+}
+
+
+
+// Render connected files + verb list
+function renderCheckFiles(){
+    const fileList = document.getElementById("fileList");
+    const verbArea = document.getElementById("verbListArea");
+
+    fileList.innerHTML = "";
+    verbArea.value = "";
+
+    // Currently loaded JSON files (static for now)
+    ["verbs.json"].forEach(f=>{
+        const li = document.createElement("li");
+        li.textContent = f;
+        fileList.appendChild(li);
+    });
+
+    // Show all infinitives
+    const verbs = Object.keys(VERBS).sort();
+    verbArea.value = verbs.join(", ");
+}
+
+function startFromFoundVerb(found){
+    currentVerb = found;
+
+    if(!currentTense) currentTense = tenseSelect.value;
+    if(!currentPronoun) currentPronoun = rand(PRONOUNS);
+
+    verbIndex = verbList.indexOf(found);
+    if(verbIndex === -1) verbIndex = 0;
+
+    updateQuestion();
+}
+
+
+// Search inside loaded file
+document.getElementById("globalSearch").addEventListener("input", e=>{
+    const val = e.target.value;
+    const box = document.getElementById("suggestions");
+    const matches = findMatches(val);
+
+    box.innerHTML = "";
+    if(!val || matches.length === 0){
+        box.style.display = "none";
+        return;
+    }
+
+    matches.slice(0,6).forEach(v=>{
+        const div = document.createElement("div");
+        div.style.padding = "6px";
+        div.style.cursor = "pointer";
+        div.textContent = `${v} — ${VERBS[v].en || ""}`;
+
+        div.onclick = ()=>{
+            startFromFoundVerb(v);
+            box.style.display = "none";
+        };
+
+        box.appendChild(div);
+    });
+
+    box.style.display = "block";
+
+
+const res = document.getElementById("globalSearchResult");
+
+if(!val){
+    res.textContent = "";
+} else if(matches.length > 0){
+    res.textContent = `✅ Found ${matches.length} match(es)`;
+} else {
+    res.textContent = "❌ Not found in any connected file";
+}
+
+
+});
+
+
+
+
+window.onload = loadVerbs;
+</script>
+<script>
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.register("service-worker.js");
+}
+</script>
+
+
+
+</body>
+</html>
