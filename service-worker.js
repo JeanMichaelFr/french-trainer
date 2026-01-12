@@ -6,6 +6,15 @@ const FILES = [
   "./manifest.json"
 ];
 
+self.addEventListener("install", event => {
+  self.skipWaiting();
+});
+
+self.addEventListener("activate", event => {
+  event.waitUntil(self.clients.claim());
+});
+
+
 self.addEventListener("install", e => {
   e.waitUntil(
     caches.open(CACHE_NAME).then(c => c.addAll(FILES))
