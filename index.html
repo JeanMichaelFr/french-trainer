@@ -15,6 +15,9 @@ body {
     padding:20px;
     touch-action: manipulation;
     user-select: none;	
+
+    overscroll-behavior: contain;
+
 }
 .box {
     background:white;
@@ -55,10 +58,38 @@ select, button, input {
     font-size:15px;
 }
 .panel h3 { margin-top:0; }
+
+@media (max-width: 768px) {
+
+    button {
+        font-size: 18px;
+        padding: 12px 16px;
+    }
+
+    #allVerbsPanel button {
+        font-size: 22px;
+        min-width: 50px;
+    }
+
+    #allVerbFr {
+        font-size: 28px !important;
+    }
+
+    #allVerbEn {
+        font-size: 20px !important;
+    }
+
+    .panel {
+        padding: 18px;
+    }
+}
+
 </style>
 </head>
 
 <body>
+
+
 
 <div class="box">
 <h2>🇫🇷 French Conjugation Trainer</h2>
@@ -266,6 +297,7 @@ function normalizeSearchInput(s){
 // --------------------------------------
 
 function toggleAllVerbs(){
+ unlockAudio(); // ✅ add here
     allVerbsVisible = !allVerbsVisible;
 
     const panel = document.getElementById("allVerbsPanel");
@@ -519,9 +551,18 @@ function applyElision(pronoun, phrase) {
 
 
 
-// =====================
-// AUDIO
-// =====================
+
+
+
+let audioUnlocked = false;
+
+function unlockAudio(){
+    if(audioUnlocked) return;
+    const u = new SpeechSynthesisUtterance("");
+    speechSynthesis.speak(u);
+    audioUnlocked = true;
+}
+
 function speak(text){
     if(!soundOn) return;
     speechSynthesis.cancel();
@@ -631,6 +672,7 @@ function buildAnswer(v, t, p) {
 // GAME FLOW
 // =====================
 function start(){
+ unlockAudio(); // ✅ add here
     const group = VOCAB_GROUPS[groupSelect.value];
     if (!group) return;
 
@@ -669,22 +711,17 @@ function updateQuestion(){
     wordEl.textContent =
         `${phrase.replace(currentAnswer,"____")} (${currentVerb}) [${TENSES[currentTense].label}]`;
 
-    // ✅ English translation from verbs.json
     const tr = VERBS[currentVerb]?.en;
     if ((showTranslation || isMobile()) && tr) {
-    wordEl.textContent += ` — ${tr}`;
-}
-
+        wordEl.textContent += ` — ${tr}`;
+    }
 
     answerEl.value = "";
     resultEl.textContent = "";
-    if(audioMode === "trainer"){
-    if(audioMode === "trainer"){
-    speak(phrase);
-}
 
-}
-
+    if(audioMode === "trainer"){
+        speak(phrase);
+    }
 
     if(conjugationVisible) renderConjugation();
     if(compareVisible) renderCompare();
@@ -974,6 +1011,28 @@ document.addEventListener("pointerdown", function (e) {
     } else {
         nextVerb();
     }
+});
+</script>
+
+<script>
+/* ========= ALL VERBS SWIPE ========= */
+
+let touchStartX = null;
+
+document.getElementById("allVerbsPanel")
+?.addEventListener("touchstart", e => {
+    touchStartX = e.touches[0].clientX;
+}, { passive:true });
+
+document.getElementById("allVerbsPanel")
+?.addEventListener("touchend", e => {
+    if(touchStartX === null) return;
+    const dx = e.changedTouches[0].clientX - touchStartX;
+
+    if(Math.abs(dx) > 40){
+        dx > 0 ? allVerbsPrev() : allVerbsNext();
+    }
+    touchStartX = null;
 });
 </script>
 
