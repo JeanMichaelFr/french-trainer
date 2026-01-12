@@ -73,6 +73,7 @@ select, button, input {
 <button onclick="toggleConjugation()">📚 Conjugation</button>
 <button onclick="toggleCheckFiles()">📁 Check file</button>
 <button onclick="toggleCheckWord()">🔎 Check word</button>
+<button onclick="toggleAllVerbs()">📖 All verbs</button>
 
 
 
@@ -114,10 +115,32 @@ select, button, input {
 
   <input id="globalSearch" placeholder="Type verb infinitive or English">
 <div id="suggestions" style="border:1px solid #ccc; display:none; background:#fff"></div>
+
+
 <button onclick="useCheckedWord()">That’ll do</button>
 
 
   <p id="globalSearchResult"></p>
+</div>
+<div id="allVerbsPanel" class="panel" style="display:none; text-align:center">
+
+    <div style="display:flex; justify-content:space-between; align-items:center">
+        <button onclick="allVerbsPrev()">L</button>
+
+        <div>
+            <div id="allVerbFr" style="font-size:26px; font-weight:bold"></div>
+            <div id="allVerbEn" style="font-size:18px; color:#555"></div>
+        </div>
+
+        <button onclick="allVerbsNext()">R</button>
+    </div>
+
+    <div style="margin-top:20px; font-size:14px; color:#777">
+        <span id="allPrev"></span>
+        <b style="margin:0 10px">⋯</b>
+        <span id="allNext"></span>
+    </div>
+
 </div>
 
 
@@ -202,6 +225,17 @@ TENSE_KEYS.forEach(t => enabledTenses[t] = true);
 let verbList = [];
 let verbIndex = 0;
 let showTranslation = false;
+let allVerbsVisible = false;
+let allVerbsIndex = 0;
+let allVerbsTimer = null;
+let allVerbsList = [];
+let audioMode = "trainer";
+let sharedVerbIndex = 0; // used by BOTH main + all verbs
+
+
+
+
+
 const tr = VERBS[currentVerb]?.en;
 if(showTranslation && tr){
     wordEl.textContent += ` — ${tr}`;
@@ -225,6 +259,119 @@ function toggleConjugation(){
 function normalizeSearchInput(s){
     return normalize(s.replace(/^to\s+/i, ""));
 }
+
+
+// ------------------------------------
+// Toggle button logic (open / close + stop loop)
+// --------------------------------------
+
+function toggleAllVerbs(){
+    allVerbsVisible = !allVerbsVisible;
+
+    const panel = document.getElementById("allVerbsPanel");
+    panel.style.display = allVerbsVisible ? "block" : "none";
+
+    if(allVerbsVisible){
+        audioMode = "allverbs";
+
+        allVerbsList = Object.keys(VERBS);
+        sharedVerbIndex = verbIndex; // sync with main window
+
+        renderAllVerbs();
+        startAllVerbsLoop();
+    } else {
+        audioMode = "trainer";
+        stopAllVerbsLoop();
+        speechSynthesis.cancel();
+        updateQuestion(); // resume conjugation audio
+    }
+}
+
+
+
+// ------------------------------------
+// Rendering (verb + translation + 3 prev / 3 next)
+// --------------------------------------
+
+function renderAllVerbs(){
+    if(!allVerbsList.length) return;
+
+    const verb = allVerbsList[sharedVerbIndex];
+    const en = VERBS[verb]?.en || "";
+
+    document.getElementById("allVerbFr").textContent = verb;
+    document.getElementById("allVerbEn").textContent = en;
+
+    if(audioMode === "allverbs"){
+        speakBilingual(verb, en);
+    }
+
+    const prev = [];
+    const next = [];
+
+    for(let i=1;i<=3;i++){
+        prev.unshift(
+            allVerbsList[(sharedVerbIndex - i + allVerbsList.length) % allVerbsList.length]
+        );
+        next.push(
+            allVerbsList[(sharedVerbIndex + i) % allVerbsList.length]
+        );
+    }
+
+    document.getElementById("allPrev").textContent = prev.join(" · ");
+    document.getElementById("allNext").textContent = next.join(" · ");
+}
+
+
+
+
+
+
+// ------------------------------------
+// L / R buttons (manual navigation)
+// --------------------------------------
+
+
+function allVerbsPrev(){
+    sharedVerbIndex =
+        (sharedVerbIndex - 1 + allVerbsList.length) % allVerbsList.length;
+
+    verbIndex = sharedVerbIndex;
+    currentVerb = verbList[verbIndex] || currentVerb;
+
+    renderAllVerbs();
+}
+
+function allVerbsNext(){
+    sharedVerbIndex =
+        (sharedVerbIndex + 1) % allVerbsList.length;
+
+    verbIndex = sharedVerbIndex;
+    currentVerb = verbList[verbIndex] || currentVerb;
+
+    renderAllVerbs();
+}
+
+
+// ------------------------------------
+// Auto-loop (infinite, stops on close)
+// --------------------------------------
+
+function startAllVerbsLoop(){
+    stopAllVerbsLoop();
+    allVerbsTimer = setInterval(()=>{
+        allVerbsNext();
+    }, 3000); // enough time for FR + EN
+}
+
+
+function stopAllVerbsLoop(){
+    if(allVerbsTimer){
+        clearInterval(allVerbsTimer);
+        allVerbsTimer = null;
+    }
+}
+
 
 
 // ------------------------------------
@@ -368,9 +515,6 @@ function applyElision(pronoun, phrase) {
 }
 
 
-// =====================
-// HELPER
-// =====================
 
 
 
@@ -384,6 +528,42 @@ function speak(text){
     const u=new SpeechSynthesisUtterance(text);
     u.lang="fr-FR";
     setTimeout(()=>speechSynthesis.speak(u),50);
+}
+
+
+// =====================
+// Add a bilingual speech helper (NEW)
+// =====================
+
+
+function speakBilingual(fr, en){
+    if(!soundOn) return;
+
+    speechSynthesis.cancel();
+
+    const uFr = new SpeechSynthesisUtterance(fr);
+    uFr.lang = "fr-FR";
+
+    const uEn = new SpeechSynthesisUtterance(en);
+    uEn.lang = "en-US";
+
+    speechSynthesis.speak(uFr);
+    speechSynthesis.speak(uEn);
+}
+
+
+// =====================
+// Add a small helper function (NEW)
+// =====================
+
+
+function speakInfinitive(verb){
+    if(!soundOn || !verb) return;
+
+    speechSynthesis.cancel(); // stop previous sound
+    const u = new SpeechSynthesisUtterance(verb);
+    u.lang = "fr-FR";
+    setTimeout(() => speechSynthesis.speak(u), 50);
 }
 
 function toggleSound(){
@@ -498,7 +678,13 @@ function updateQuestion(){
 
     answerEl.value = "";
     resultEl.textContent = "";
+    if(audioMode === "trainer"){
+    if(audioMode === "trainer"){
     speak(phrase);
+}
+
+}
+
 
     if(conjugationVisible) renderConjugation();
     if(compareVisible) renderCompare();
