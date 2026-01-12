@@ -32,14 +32,6 @@ body {
     font-size: 12px;
     line-height: 1;
 }
-@media (max-width: 768px) {
-    .small-play {
-        padding: 10px 14px;
-        font-size: 18px;
-        border-radius: 8px;
-    }
-}
-
 
 h2 { text-align:center; }
 select, button, input {
@@ -52,21 +44,7 @@ select, button, input {
     text-align:center;
     margin:20px 0;
 }
-@media (max-width: 768px) {
-    .center {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 6px;
-    }
-
-    .center button,
-    .center select {
-        flex: 1 1 auto;
-        min-width: 140px;
-    }
-}
-
+.center { text-align:center; }
 .compare {
     color:#555;
     font-size:15px;
@@ -105,28 +83,6 @@ select, button, input {
         padding: 18px;
     }
 }
-
-@media (max-width: 768px) {
-    #tenseToggles label {
-        display: block;
-        margin-bottom: 10px;
-        font-size: 18px;
-    }
-
-    #tenseToggles input[type="checkbox"] {
-        transform: scale(1.5);
-        margin-right: 8px;
-    }
-}
-
-#suggestions {
-    max-height: 220px;
-    overflow-y: auto;
-    width: 100%;
-    box-sizing: border-box;
-    z-index: 10;
-}
-
 
 </style>
 </head>
@@ -416,7 +372,6 @@ function allVerbsPrev(){
     currentVerb = verbList[verbIndex] || currentVerb;
 
     renderAllVerbs();
-stopAllVerbsLoop();
 }
 
 function allVerbsNext(){
@@ -427,7 +382,6 @@ function allVerbsNext(){
     currentVerb = verbList[verbIndex] || currentVerb;
 
     renderAllVerbs();
-stopAllVerbsLoop();
 }
 
 
@@ -1041,22 +995,18 @@ window.onload = loadVerbs;
 <script>
 if ("serviceWorker" in navigator) {
   navigator.serviceWorker.register("service-worker.js");
+
+  navigator.serviceWorker.addEventListener("controllerchange", () => {
+    window.location.reload();
+  });
 }
-
-
 </script>
+
 <script>
 /* ========= MOBILE TAP NAVIGATION ========= */
 
 document.addEventListener("pointerdown", function (e) {
     if (e.pointerType !== "touch") return;
-
-    // ⛔ Do not change verbs while typing
-    if (
-        document.activeElement &&
-        ["INPUT", "TEXTAREA", "SELECT"].includes(document.activeElement.tagName)
-    ) return;
-
     if (e.target.closest("button, input, select")) return;
 
     if (e.clientX < window.innerWidth / 2) {
@@ -1065,7 +1015,6 @@ document.addEventListener("pointerdown", function (e) {
         nextVerb();
     }
 });
-
 </script>
 
 <script>
