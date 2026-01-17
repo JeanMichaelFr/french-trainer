@@ -18616,6 +18616,1512 @@
       "vous": "suffoquiez",
       "ils": "suffoquent"
     }
-  }
+  },
 
+
+  "detester": {
+    "en": "to hate",
+    "level": ["A1"],
+    "aux": "avoir",
+    "pp": "détesté",
+    "present": {
+      "je": "déteste",
+      "tu": "détestes",
+      "il": "déteste",
+      "nous": "détestons",
+      "vous": "détestez",
+      "ils": "détestent"
+    },
+    "imparfait": {
+      "je": "détestais",
+      "tu": "détestais",
+      "il": "détestait",
+      "nous": "détestions",
+      "vous": "détestiez",
+      "ils": "détestaient"
+    },
+    "future": {
+      "je": "détesterai",
+      "tu": "détesteras",
+      "il": "détestera",
+      "nous": "détesterons",
+      "vous": "détesterez",
+      "ils": "détesteront"
+    },
+    "conditional": {
+      "je": "détesterais",
+      "tu": "détesterais",
+      "il": "détesterait",
+      "nous": "détesterions",
+      "vous": "détesteriez",
+      "ils": "détesteraient"
+    },
+    "subjonctif_present": {
+      "je": "déteste",
+      "tu": "détestes",
+      "il": "déteste",
+      "nous": "détestions",
+      "vous": "détestiez",
+      "ils": "détestent"
+    }
+  },
+
+  "raconter": {
+    "en": "to tell a story",
+    "level": ["A1"],
+    "aux": "avoir",
+    "pp": "raconté",
+    "present": {
+      "je": "raconte",
+      "tu": "racontes",
+      "il": "raconte",
+      "nous": "racontons",
+      "vous": "racontez",
+      "ils": "racontent"
+    },
+    "imparfait": {
+      "je": "racontais",
+      "tu": "racontais",
+      "il": "racontait",
+      "nous": "racontions",
+      "vous": "racontiez",
+      "ils": "racontaient"
+    },
+    "future": {
+      "je": "raconterai",
+      "tu": "raconteras",
+      "il": "racontera",
+      "nous": "raconterons",
+      "vous": "raconterez",
+      "ils": "raconteront"
+    },
+    "conditional": {
+      "je": "raconterais",
+      "tu": "raconterais",
+      "il": "raconterait",
+      "nous": "raconterions",
+      "vous": "raconteriez",
+      "ils": "raconteraient"
+    },
+    "subjonctif_present": {
+      "je": "raconte",
+      "tu": "racontes",
+      "il": "raconte",
+      "nous": "racontions",
+      "vous": "racontiez",
+      "ils": "racontent"
+    }
+  },
+
+  "nager": {
+    "en": "to swim",
+    "level": ["A1"],
+    "aux": "avoir",
+    "pp": "nagé",
+    "present": {
+      "je": "nage",
+      "tu": "nages",
+      "il": "nage",
+      "nous": "nageons",
+      "vous": "nagez",
+      "ils": "nagent"
+    },
+    "imparfait": {
+      "je": "nageais",
+      "tu": "nageais",
+      "il": "nageait",
+      "nous": "nagions",
+      "vous": "nagiez",
+      "ils": "nageaient"
+    },
+    "future": {
+      "je": "nagerai",
+      "tu": "nageras",
+      "il": "nagera",
+      "nous": "nagerons",
+      "vous": "nagerez",
+      "ils": "nageront"
+    },
+    "conditional": {
+      "je": "nagerais",
+      "tu": "nagerais",
+      "il": "nagerait",
+      "nous": "nagerions",
+      "vous": "nageriez",
+      "ils": "nageraient"
+    },
+    "subjonctif_present": {
+      "je": "nage",
+      "tu": "nages",
+      "il": "nage",
+      "nous": "nagions",
+      "vous": "nagiez",
+      "ils": "nagent"
+    }
+  },
+
+  "compter": {
+    "en": "to count",
+    "level": ["A1"],
+    "aux": "avoir",
+    "pp": "compté",
+    "present": {
+      "je": "compte",
+      "tu": "comptes",
+      "il": "compte",
+      "nous": "comptons",
+      "vous": "comptez",
+      "ils": "comptent"
+    },
+    "imparfait": {
+      "je": "comptais",
+      "tu": "comptais",
+      "il": "comptait",
+      "nous": "comptions",
+      "vous": "comptiez",
+      "ils": "comptaient"
+    },
+    "future": {
+      "je": "compterai",
+      "tu": "compteras",
+      "il": "comptera",
+      "nous": "compterons",
+      "vous": "compterez",
+      "ils": "compteront"
+    },
+    "conditional": {
+      "je": "compterais",
+      "tu": "compterais",
+      "il": "compterait",
+      "nous": "compterions",
+      "vous": "compteriez",
+      "ils": "compteraient"
+    },
+    "subjonctif_present": {
+      "je": "compte",
+      "tu": "comptes",
+      "il": "compte",
+      "nous": "comptions",
+      "vous": "comptiez",
+      "ils": "comptent"
+    }
+  },
+
+  "se_lever": {
+    "en": "to get up",
+    "level": ["A1"],
+    "aux": "etre",
+    "pp": "levé",
+    "present": {
+      "je": "me lève",
+      "tu": "te lèves",
+      "il": "se lève",
+      "nous": "nous levons",
+      "vous": "vous levez",
+      "ils": "se lèvent"
+    },
+    "imparfait": {
+      "je": "me levais",
+      "tu": "te levais",
+      "il": "se levait",
+      "nous": "nous levions",
+      "vous": "vous leviez",
+      "ils": "se levaient"
+    },
+    "future": {
+      "je": "me lèverai",
+      "tu": "te lèveras",
+      "il": "se lèvera",
+      "nous": "nous lèverons",
+      "vous": "vous lèverez",
+      "ils": "se lèveront"
+    },
+    "conditional": {
+      "je": "me lèverais",
+      "tu": "te lèverais",
+      "il": "se lèverait",
+      "nous": "nous lèverions",
+      "vous": "vous lèveriez",
+      "ils": "se lèveraient"
+    },
+    "subjonctif_present": {
+      "je": "me lève",
+      "tu": "te lèves",
+      "il": "se lève",
+      "nous": "nous levions",
+      "vous": "vous leviez",
+      "ils": "se lèvent"
+    }
+  },
+
+  "se_laver": {
+    "en": "to wash oneself",
+    "level": ["A1"],
+    "aux": "etre",
+    "pp": "lavé",
+    "present": {
+      "je": "me lave",
+      "tu": "te laves",
+      "il": "se lave",
+      "nous": "nous lavons",
+      "vous": "vous lavez",
+      "ils": "se lavent"
+    },
+    "imparfait": {
+      "je": "me lavais",
+      "tu": "te lavais",
+      "il": "se lavait",
+      "nous": "nous lavions",
+      "vous": "vous laviez",
+      "ils": "se lavaient"
+    },
+    "future": {
+      "je": "me laverai",
+      "tu": "te laveras",
+      "il": "se lavera",
+      "nous": "nous laverons",
+      "vous": "vous laverez",
+      "ils": "se laveront"
+    },
+    "conditional": {
+      "je": "me laverais",
+      "tu": "te laverais",
+      "il": "se laverait",
+      "nous": "nous laverions",
+      "vous": "vous laveriez",
+      "ils": "se laveraient"
+    },
+    "subjonctif_present": {
+      "je": "me lave",
+      "tu": "te laves",
+      "il": "se lave",
+      "nous": "nous lavions",
+      "vous": "vous laviez",
+      "ils": "se lavent"
+    }
+  },
+
+  "s_habiller": {
+    "en": "to get dressed",
+    "level": ["A1"],
+    "aux": "etre",
+    "pp": "habillé",
+    "present": {
+      "je": "m'habille",
+      "tu": "t'habilles",
+      "il": "s'habille",
+      "nous": "nous habillons",
+      "vous": "vous habillez",
+      "ils": "s'habillent"
+    },
+    "imparfait": {
+      "je": "m'habillais",
+      "tu": "t'habillais",
+      "il": "s'habillait",
+      "nous": "nous habillions",
+      "vous": "vous habilliez",
+      "ils": "s'habillaient"
+    },
+    "future": {
+      "je": "m'habillerai",
+      "tu": "t'habilleras",
+      "il": "s'habillera",
+      "nous": "nous habillerons",
+      "vous": "vous habillerez",
+      "ils": "s'habilleront"
+    },
+    "conditional": {
+      "je": "m'habillerais",
+      "tu": "t'habillerais",
+      "il": "s'habillerait",
+      "nous": "nous habillerions",
+      "vous": "vous habilleriez",
+      "ils": "s'habilleraient"
+    },
+    "subjonctif_present": {
+      "je": "m'habille",
+      "tu": "t'habilles",
+      "il": "s'habille",
+      "nous": "nous habillions",
+      "vous": "vous habilliez",
+      "ils": "s'habillent"
+    }
+  },
+
+  "se_coucher": {
+    "en": "to go to bed",
+    "level": ["A1"],
+    "aux": "etre",
+    "pp": "couché",
+    "present": {
+      "je": "me couche",
+      "tu": "te couches",
+      "il": "se couche",
+      "nous": "nous couchons",
+      "vous": "vous couchez",
+      "ils": "se couchent"
+    },
+    "imparfait": {
+      "je": "me couchais",
+      "tu": "te couchais",
+      "il": "se couchait",
+      "nous": "nous couchions",
+      "vous": "vous couchiez",
+      "ils": "se couchaient"
+    },
+    "future": {
+      "je": "me coucherai",
+      "tu": "te coucheras",
+      "il": "se couchera",
+      "nous": "nous coucherons",
+      "vous": "vous coucherez",
+      "ils": "se coucheront"
+    },
+    "conditional": {
+      "je": "me coucherais",
+      "tu": "te coucherais",
+      "il": "se coucherait",
+      "nous": "nous coucherions",
+      "vous": "vous coucheriez",
+      "ils": "se coucheraient"
+    },
+    "subjonctif_present": {
+      "je": "me couche",
+      "tu": "te couches",
+      "il": "se couche",
+      "nous": "nous couchions",
+      "vous": "vous couchiez",
+      "ils": "se couchent"
+    }
+  },
+
+  "raconter": {
+    "en": "to tell (a story)",
+    "level": ["A1"],
+    "aux": "avoir",
+    "pp": "raconté",
+    "present": {
+      "je": "raconte",
+      "tu": "racontes",
+      "il": "raconte",
+      "nous": "racontons",
+      "vous": "racontez",
+      "ils": "racontent"
+    },
+    "imparfait": {
+      "je": "racontais",
+      "tu": "racontais",
+      "il": "racontait",
+      "nous": "racontions",
+      "vous": "racontiez",
+      "ils": "racontaient"
+    },
+    "future": {
+      "je": "raconterai",
+      "tu": "raconteras",
+      "il": "racontera",
+      "nous": "raconterons",
+      "vous": "raconterez",
+      "ils": "raconteront"
+    },
+    "conditional": {
+      "je": "raconterais",
+      "tu": "raconterais",
+      "il": "raconterait",
+      "nous": "raconterions",
+      "vous": "raconteriez",
+      "ils": "raconteraient"
+    },
+    "subjonctif_present": {
+      "je": "raconte",
+      "tu": "racontes",
+      "il": "raconte",
+      "nous": "racontions",
+      "vous": "racontiez",
+      "ils": "racontent"
+    }
+  },
+
+  "rester": {
+    "en": "to stay / remain",
+    "level": ["A1"],
+    "aux": "avoir",
+    "pp": "resté",
+    "present": {
+      "je": "reste",
+      "tu": "restes",
+      "il": "reste",
+      "nous": "restons",
+      "vous": "restez",
+      "ils": "restent"
+    },
+    "imparfait": {
+      "je": "restais",
+      "tu": "restais",
+      "il": "restait",
+      "nous": "restions",
+      "vous": "restiez",
+      "ils": "restaient"
+    },
+    "future": {
+      "je": "resterai",
+      "tu": "resteras",
+      "il": "restera",
+      "nous": "resterons",
+      "vous": "resterez",
+      "ils": "resteront"
+    },
+    "conditional": {
+      "je": "resterais",
+      "tu": "resterais",
+      "il": "resterait",
+      "nous": "resterions",
+      "vous": "resteriez",
+      "ils": "resteraient"
+    },
+    "subjonctif_present": {
+      "je": "reste",
+      "tu": "restes",
+      "il": "reste",
+      "nous": "restions",
+      "vous": "restiez",
+      "ils": "restent"
+    }
+  },
+
+  "changer": {
+    "en": "to change",
+    "level": ["A1"],
+    "aux": "avoir",
+    "pp": "changé",
+    "present": {
+      "je": "change",
+      "tu": "changes",
+      "il": "change",
+      "nous": "changeons",
+      "vous": "changez",
+      "ils": "changent"
+    },
+    "imparfait": {
+      "je": "changeais",
+      "tu": "changeais",
+      "il": "changeait",
+      "nous": "changions",
+      "vous": "changiez",
+      "ils": "changeaient"
+    },
+    "future": {
+      "je": "changerai",
+      "tu": "changeras",
+      "il": "changera",
+      "nous": "changerons",
+      "vous": "changerez",
+      "ils": "changeront"
+    },
+    "conditional": {
+      "je": "changerais",
+      "tu": "changerais",
+      "il": "changerait",
+      "nous": "changerions",
+      "vous": "changeriez",
+      "ils": "changeraient"
+    },
+    "subjonctif_present": {
+      "je": "change",
+      "tu": "changes",
+      "il": "change",
+      "nous": "changions",
+      "vous": "changiez",
+      "ils": "changent"
+    }
+  },
+
+  "grandir": {
+    "en": "to grow (up)",
+    "level": ["A1"],
+    "aux": "avoir",
+    "pp": "grandi",
+    "present": {
+      "je": "grandis",
+      "tu": "grandis",
+      "il": "grandit",
+      "nous": "grandissons",
+      "vous": "grandissez",
+      "ils": "grandissent"
+    },
+    "imparfait": {
+      "je": "grandissais",
+      "tu": "grandissais",
+      "il": "grandissait",
+      "nous": "grandissions",
+      "vous": "grandissiez",
+      "ils": "grandissaient"
+    },
+    "future": {
+      "je": "grandirai",
+      "tu": "grandiras",
+      "il": "grandira",
+      "nous": "grandirons",
+      "vous": "grandirez",
+      "ils": "grandiront"
+    },
+    "conditional": {
+      "je": "grandirais",
+      "tu": "grandirais",
+      "il": "grandirait",
+      "nous": "grandirions",
+      "vous": "grandiriez",
+      "ils": "grandiraient"
+    },
+    "subjonctif_present": {
+      "je": "grandisse",
+      "tu": "grandisses",
+      "il": "grandisse",
+      "nous": "grandissions",
+      "vous": "grandissiez",
+      "ils": "grandissent"
+    }
+  },
+
+  "voyager": {
+    "en": "to travel",
+    "level": ["A1"],
+    "aux": "avoir",
+    "pp": "voyagé",
+    "present": {
+      "je": "voyage",
+      "tu": "voyages",
+      "il": "voyage",
+      "nous": "voyageons",
+      "vous": "voyagez",
+      "ils": "voyagent"
+    },
+    "imparfait": {
+      "je": "voyageais",
+      "tu": "voyageais",
+      "il": "voyageait",
+      "nous": "voyagions",
+      "vous": "voyagiez",
+      "ils": "voyageaient"
+    },
+    "future": {
+      "je": "voyagerai",
+      "tu": "voyageras",
+      "il": "voyagera",
+      "nous": "voyagerons",
+      "vous": "voyagerez",
+      "ils": "voyageront"
+    },
+    "conditional": {
+      "je": "voyagerais",
+      "tu": "voyagerais",
+      "il": "voyagerait",
+      "nous": "voyagerions",
+      "vous": "voyageriez",
+      "ils": "voyageraient"
+    },
+    "subjonctif_present": {
+      "je": "voyage",
+      "tu": "voyages",
+      "il": "voyage",
+      "nous": "voyagions",
+      "vous": "voyagiez",
+      "ils": "voyagent"
+    }
+  },
+
+  "douter": {
+    "en": "to doubt",
+    "level": ["A1"],
+    "aux": "avoir",
+    "pp": "douté",
+    "present": {
+      "je": "doute",
+      "tu": "doutes",
+      "il": "doute",
+      "nous": "doutons",
+      "vous": "doutez",
+      "ils": "doutent"
+    },
+    "imparfait": {
+      "je": "doutais",
+      "tu": "doutais",
+      "il": "doutait",
+      "nous": "doutions",
+      "vous": "doutiez",
+      "ils": "doutaient"
+    },
+    "future": {
+      "je": "douterai",
+      "tu": "douteras",
+      "il": "doutera",
+      "nous": "douterons",
+      "vous": "douterez",
+      "ils": "douteront"
+    },
+    "conditional": {
+      "je": "douterais",
+      "tu": "douterais",
+      "il": "douterait",
+      "nous": "douterions",
+      "vous": "douteriez",
+      "ils": "douteraient"
+    },
+    "subjonctif_present": {
+      "je": "doute",
+      "tu": "doutes",
+      "il": "doute",
+      "nous": "doutions",
+      "vous": "doutiez",
+      "ils": "doutent"
+    }
+  },
+
+  "detester": {
+    "en": "to hate",
+    "level": ["A1"],
+    "aux": "avoir",
+    "pp": "détesté",
+    "present": {
+      "je": "déteste",
+      "tu": "détestes",
+      "il": "déteste",
+      "nous": "détestons",
+      "vous": "détestez",
+      "ils": "détestent"
+    },
+    "imparfait": {
+      "je": "détestais",
+      "tu": "détestais",
+      "il": "détestait",
+      "nous": "détestions",
+      "vous": "détestiez",
+      "ils": "détestaient"
+    },
+    "future": {
+      "je": "détesterai",
+      "tu": "détesteras",
+      "il": "détestera",
+      "nous": "détesterons",
+      "vous": "détesterez",
+      "ils": "détesteront"
+    },
+    "conditional": {
+      "je": "détesterais",
+      "tu": "détesterais",
+      "il": "détesterait",
+      "nous": "détesterions",
+      "vous": "détesteriez",
+      "ils": "détesteraient"
+    },
+    "subjonctif_present": {
+      "je": "déteste",
+      "tu": "détestes",
+      "il": "déteste",
+      "nous": "détestions",
+      "vous": "détestiez",
+      "ils": "détestent"
+    }
+  },
+
+  "analyser": {
+    "en": "to analyze",
+    "level": ["A1"],
+    "aux": "avoir",
+    "pp": "analysé",
+    "present": {
+      "je": "analyse",
+      "tu": "analyses",
+      "il": "analyse",
+      "nous": "analysons",
+      "vous": "analysez",
+      "ils": "analysent"
+    },
+    "imparfait": {
+      "je": "analysais",
+      "tu": "analysais",
+      "il": "analysait",
+      "nous": "analysions",
+      "vous": "analysiez",
+      "ils": "analysaient"
+    },
+    "future": {
+      "je": "analyserai",
+      "tu": "analyseras",
+      "il": "analysera",
+      "nous": "analyserons",
+      "vous": "analyserez",
+      "ils": "analyseront"
+    },
+    "conditional": {
+      "je": "analyserais",
+      "tu": "analyserais",
+      "il": "analyserait",
+      "nous": "analyserions",
+      "vous": "analyseriez",
+      "ils": "analyseraient"
+    },
+    "subjonctif_present": {
+      "je": "analyse",
+      "tu": "analyses",
+      "il": "analyse",
+      "nous": "analysions",
+      "vous": "analysiez",
+      "ils": "analysent"
+    }
+  },
+
+  "comparer": {
+    "en": "to compare",
+    "level": ["A1"],
+    "aux": "avoir",
+    "pp": "comparé",
+    "present": {
+      "je": "compare",
+      "tu": "compares",
+      "il": "compare",
+      "nous": "comparons",
+      "vous": "comparez",
+      "ils": "comparent"
+    },
+    "imparfait": {
+      "je": "comparais",
+      "tu": "comparais",
+      "il": "comparait",
+      "nous": "comparions",
+      "vous": "compariez",
+      "ils": "comparaient"
+    },
+    "future": {
+      "je": "comparerai",
+      "tu": "compareras",
+      "il": "comparera",
+      "nous": "comparerons",
+      "vous": "comparerez",
+      "ils": "compareront"
+    },
+    "conditional": {
+      "je": "comparerais",
+      "tu": "comparerais",
+      "il": "comparerait",
+      "nous": "comparerions",
+      "vous": "compareriez",
+      "ils": "comparerraient"
+    },
+    "subjonctif_present": {
+      "je": "compare",
+      "tu": "compares",
+      "il": "compare",
+      "nous": "comparions",
+      "vous": "compariez",
+      "ils": "comparent"
+    }
+  },
+
+  "critiquer": {
+    "en": "to criticize",
+    "level": ["A1"],
+    "aux": "avoir",
+    "pp": "critiqué",
+    "present": {
+      "je": "critique",
+      "tu": "critiques",
+      "il": "critique",
+      "nous": "critiquons",
+      "vous": "critiquez",
+      "ils": "critiquent"
+    },
+    "imparfait": {
+      "je": "critiquais",
+      "tu": "critiquais",
+      "il": "critiquait",
+      "nous": "critiquions",
+      "vous": "critiquiez",
+      "ils": "critiquaient"
+    },
+    "future": {
+      "je": "critiquerai",
+      "tu": "critiqueras",
+      "il": "critiquera",
+      "nous": "critiquerons",
+      "vous": "critiquerez",
+      "ils": "critiqueront"
+    },
+    "conditional": {
+      "je": "critiquerais",
+      "tu": "critiquerais",
+      "il": "critiquerait",
+      "nous": "critiquerions",
+      "vous": "critiqueriez",
+      "ils": "critiqueraient"
+    },
+    "subjonctif_present": {
+      "je": "critique",
+      "tu": "critiques",
+      "il": "critique",
+      "nous": "critiquions",
+      "vous": "critiquiez",
+      "ils": "critiquent"
+    }
+  },
+
+  "justifier": {
+    "en": "to justify",
+    "level": ["A1"],
+    "aux": "avoir",
+    "pp": "justifié",
+    "present": {
+      "je": "justifie",
+      "tu": "justifies",
+      "il": "justifie",
+      "nous": "justifions",
+      "vous": "justifiez",
+      "ils": "justifient"
+    },
+    "imparfait": {
+      "je": "justifiais",
+      "tu": "justifiais",
+      "il": "justifiait",
+      "nous": "justifiions",
+      "vous": "justifiiez",
+      "ils": "justifiaient"
+    },
+    "future": {
+      "je": "justifierai",
+      "tu": "justifieras",
+      "il": "justifiera",
+      "nous": "justifierons",
+      "vous": "justifierez",
+      "ils": "justifieront"
+    },
+    "conditional": {
+      "je": "justifierais",
+      "tu": "justifierais",
+      "il": "justifierait",
+      "nous": "justifierions",
+      "vous": "justifieriez",
+      "ils": "justifieraient"
+    },
+    "subjonctif_present": {
+      "je": "justifie",
+      "tu": "justifies",
+      "il": "justifie",
+      "nous": "justifiions",
+      "vous": "justifiiez",
+      "ils": "justifient"
+    }
+  },
+
+  "resumer": {
+    "en": "to summarize",
+    "level": ["A1"],
+    "aux": "avoir",
+    "pp": "résumé",
+    "present": {
+      "je": "résume",
+      "tu": "résumes",
+      "il": "résume",
+      "nous": "résumons",
+      "vous": "résumez",
+      "ils": "résument"
+    },
+    "imparfait": {
+      "je": "résumais",
+      "tu": "résumais",
+      "il": "résumait",
+      "nous": "résumions",
+      "vous": "résumiez",
+      "ils": "résumaient"
+    },
+    "future": {
+      "je": "résumerai",
+      "tu": "résumeras",
+      "il": "résumera",
+      "nous": "résumerons",
+      "vous": "résumerez",
+      "ils": "résumeront"
+    },
+    "conditional": {
+      "je": "résumerais",
+      "tu": "résumerais",
+      "il": "résumerait",
+      "nous": "résumerions",
+      "vous": "résumeriez",
+      "ils": "résumeraient"
+    },
+    "subjonctif_present": {
+      "je": "résume",
+      "tu": "résumes",
+      "il": "résume",
+      "nous": "résumions",
+      "vous": "résumiez",
+      "ils": "résument"
+    }
+  },
+
+  "interpreter": {
+    "en": "to interpret",
+    "level": ["A1"],
+    "aux": "avoir",
+    "pp": "interprété",
+    "present": {
+      "je": "interprète",
+      "tu": "interprètes",
+      "il": "interprète",
+      "nous": "interprétons",
+      "vous": "interprétez",
+      "ils": "interprètent"
+    },
+    "imparfait": {
+      "je": "interprétais",
+      "tu": "interprétais",
+      "il": "interprétait",
+      "nous": "interprétions",
+      "vous": "interprétiez",
+      "ils": "interprétaient"
+    },
+    "future": {
+      "je": "interpréterai",
+      "tu": "interpréteras",
+      "il": "interprétera",
+      "nous": "interpréterons",
+      "vous": "interpréterez",
+      "ils": "interpréteront"
+    },
+    "conditional": {
+      "je": "interpréterais",
+      "tu": "interpréterais",
+      "il": "interpréterait",
+      "nous": "interpréterions",
+      "vous": "interpréteriez",
+      "ils": "interpréteraient"
+    },
+    "subjonctif_present": {
+      "je": "interprète",
+      "tu": "interprètes",
+      "il": "interprète",
+      "nous": "interprétions",
+      "vous": "interprétiez",
+      "ils": "interprètent"
+    }
+  },
+
+  "etudier": {
+    "en": "to study",
+    "level": ["A1"],
+    "aux": "avoir",
+    "pp": "étudié",
+    "present": {
+      "je": "étudie",
+      "tu": "étudies",
+      "il": "étudie",
+      "nous": "étudions",
+      "vous": "étudiez",
+      "ils": "étudient"
+    },
+    "imparfait": {
+      "je": "étudiais",
+      "tu": "étudiais",
+      "il": "étudiait",
+      "nous": "étudiions",
+      "vous": "étudiiez",
+      "ils": "étudiaient"
+    },
+    "future": {
+      "je": "étudierai",
+      "tu": "étudieras",
+      "il": "étudiera",
+      "nous": "étudierons",
+      "vous": "étudierez",
+      "ils": "étudieront"
+    },
+    "conditional": {
+      "je": "étudierais",
+      "tu": "étudierais",
+      "il": "étudierait",
+      "nous": "étudierions",
+      "vous": "étudieriez",
+      "ils": "étudieraient"
+    },
+    "subjonctif_present": {
+      "je": "étudie",
+      "tu": "étudies",
+      "il": "étudie",
+      "nous": "étudiions",
+      "vous": "étudiiez",
+      "ils": "étudient"
+    }
+  },
+
+  "discuter": {
+    "en": "to discuss",
+    "level": ["A1"],
+    "aux": "avoir",
+    "pp": "discuté",
+    "present": {
+      "je": "discute",
+      "tu": "discutes",
+      "il": "discute",
+      "nous": "discutons",
+      "vous": "discutez",
+      "ils": "discutent"
+    },
+    "imparfait": {
+      "je": "discutais",
+      "tu": "discutais",
+      "il": "discutait",
+      "nous": "discutions",
+      "vous": "discutiez",
+      "ils": "discutaient"
+    },
+    "future": {
+      "je": "discuterai",
+      "tu": "discuteras",
+      "il": "discutera",
+      "nous": "discuterons",
+      "vous": "discuterez",
+      "ils": "discuteront"
+    },
+    "conditional": {
+      "je": "discuterais",
+      "tu": "discuterais",
+      "il": "discuterait",
+      "nous": "discuterions",
+      "vous": "discuteriez",
+      "ils": "discuteraient"
+    },
+    "subjonctif_present": {
+      "je": "discute",
+      "tu": "discutes",
+      "il": "discute",
+      "nous": "discutions",
+      "vous": "discutiez",
+      "ils": "discutent"
+    }
+  },
+
+
+  "argumenter": {
+    "en": "to argue (a point)",
+    "level": ["A1"],
+    "aux": "avoir",
+    "pp": "argumenté",
+    "present": {
+      "je": "argumente",
+      "tu": "argumentes",
+      "il": "argumente",
+      "nous": "argumentons",
+      "vous": "argumentez",
+      "ils": "argumentent"
+    },
+    "imparfait": {
+      "je": "argumentais",
+      "tu": "argumentais",
+      "il": "argumentait",
+      "nous": "argumentions",
+      "vous": "argumentiez",
+      "ils": "argumentaient"
+    },
+    "future": {
+      "je": "argumenterai",
+      "tu": "argumenteras",
+      "il": "argumentera",
+      "nous": "argumenterons",
+      "vous": "argumenterez",
+      "ils": "argumenteront"
+    },
+    "conditional": {
+      "je": "argumenterais",
+      "tu": "argumenterais",
+      "il": "argumenterait",
+      "nous": "argumenterions",
+      "vous": "argumenteriez",
+      "ils": "argumenteraient"
+    },
+    "subjonctif_present": {
+      "je": "argumente",
+      "tu": "argumentes",
+      "il": "argumente",
+      "nous": "argumentions",
+      "vous": "argumentiez",
+      "ils": "argumentent"
+    }
+  },
+
+  "proposer": {
+    "en": "to suggest",
+    "level": ["A1"],
+    "aux": "avoir",
+    "pp": "proposé",
+    "present": {
+      "je": "propose",
+      "tu": "proposes",
+      "il": "propose",
+      "nous": "proposons",
+      "vous": "proposez",
+      "ils": "proposent"
+    },
+    "imparfait": {
+      "je": "proposais",
+      "tu": "proposais",
+      "il": "proposait",
+      "nous": "proposions",
+      "vous": "proposiez",
+      "ils": "proposaient"
+    },
+    "future": {
+      "je": "proposerai",
+      "tu": "proposeras",
+      "il": "proposera",
+      "nous": "proposerons",
+      "vous": "proposerez",
+      "ils": "proposeront"
+    },
+    "conditional": {
+      "je": "proposerais",
+      "tu": "proposerais",
+      "il": "proposerait",
+      "nous": "proposerions",
+      "vous": "proposeriez",
+      "ils": "proposeraient"
+    },
+    "subjonctif_present": {
+      "je": "propose",
+      "tu": "proposes",
+      "il": "propose",
+      "nous": "proposions",
+      "vous": "proposiez",
+      "ils": "proposent"
+    }
+  },
+
+  "refuser": {
+    "en": "to refuse",
+    "level": ["A1"],
+    "aux": "avoir",
+    "pp": "refusé",
+    "present": {
+      "je": "refuse",
+      "tu": "refuses",
+      "il": "refuse",
+      "nous": "refusons",
+      "vous": "refusez",
+      "ils": "refusent"
+    },
+    "imparfait": {
+      "je": "refusais",
+      "tu": "refusais",
+      "il": "refusait",
+      "nous": "refusions",
+      "vous": "refusiez",
+      "ils": "refusaient"
+    },
+    "future": {
+      "je": "refuserai",
+      "tu": "refuseras",
+      "il": "refusera",
+      "nous": "refuserons",
+      "vous": "refuserez",
+      "ils": "refuseront"
+    },
+    "conditional": {
+      "je": "refuserais",
+      "tu": "refuserais",
+      "il": "refuserait",
+      "nous": "refuserions",
+      "vous": "refuseriez",
+      "ils": "refuseraient"
+    },
+    "subjonctif_present": {
+      "je": "refuse",
+      "tu": "refuses",
+      "il": "refuse",
+      "nous": "refusions",
+      "vous": "refusiez",
+      "ils": "refusent"
+    }
+  },
+
+  "accepter": {
+    "en": "to accept",
+    "level": ["A1"],
+    "aux": "avoir",
+    "pp": "accepté",
+    "present": {
+      "je": "accepte",
+      "tu": "acceptes",
+      "il": "accepte",
+      "nous": "acceptons",
+      "vous": "acceptez",
+      "ils": "acceptent"
+    },
+    "imparfait": {
+      "je": "acceptais",
+      "tu": "acceptais",
+      "il": "acceptait",
+      "nous": "acceptions",
+      "vous": "acceptiez",
+      "ils": "acceptaient"
+    },
+    "future": {
+      "je": "accepterai",
+      "tu": "accepteras",
+      "il": "acceptera",
+      "nous": "accepterons",
+      "vous": "accepterez",
+      "ils": "accepteront"
+    },
+    "conditional": {
+      "je": "accepterais",
+      "tu": "accepterais",
+      "il": "accepterait",
+      "nous": "accepterions",
+      "vous": "accepteriez",
+      "ils": "accepteraient"
+    },
+    "subjonctif_present": {
+      "je": "accepte",
+      "tu": "acceptes",
+      "il": "accepte",
+      "nous": "acceptions",
+      "vous": "acceptiez",
+      "ils": "acceptent"
+    }
+  },
+
+  "choisir": {
+    "en": "to choose",
+    "level": ["A1"],
+    "aux": "avoir",
+    "pp": "choisi",
+    "present": {
+      "je": "choisis",
+      "tu": "choisis",
+      "il": "choisit",
+      "nous": "choisissons",
+      "vous": "choisissez",
+      "ils": "choisissent"
+    },
+    "imparfait": {
+      "je": "choisissais",
+      "tu": "choisissais",
+      "il": "choisissait",
+      "nous": "choisissions",
+      "vous": "choisissiez",
+      "ils": "choisissaient"
+    },
+    "future": {
+      "je": "choisirai",
+      "tu": "choisiras",
+      "il": "choisira",
+      "nous": "choisirons",
+      "vous": "choisirez",
+      "ils": "choisiront"
+    },
+    "conditional": {
+      "je": "choisirais",
+      "tu": "choisirais",
+      "il": "choisirait",
+      "nous": "choisirions",
+      "vous": "choisiriez",
+      "ils": "choisiraient"
+    },
+    "subjonctif_present": {
+      "je": "choisisse",
+      "tu": "choisisses",
+      "il": "choisisse",
+      "nous": "choisissions",
+      "vous": "choisissiez",
+      "ils": "choisissent"
+    }
+  },
+
+  "decider": {
+    "en": "to decide",
+    "level": ["A1"],
+    "aux": "avoir",
+    "pp": "décidé",
+    "present": {
+      "je": "décide",
+      "tu": "décides",
+      "il": "décide",
+      "nous": "décidons",
+      "vous": "décidez",
+      "ils": "décident"
+    },
+    "imparfait": {
+      "je": "décidais",
+      "tu": "décidais",
+      "il": "décidait",
+      "nous": "décidions",
+      "vous": "décidiez",
+      "ils": "décidaient"
+    },
+    "future": {
+      "je": "déciderai",
+      "tu": "décideras",
+      "il": "décidera",
+      "nous": "déciderons",
+      "vous": "déciderez",
+      "ils": "décideront"
+    },
+    "conditional": {
+      "je": "déciderais",
+      "tu": "déciderais",
+      "il": "déciderait",
+      "nous": "déciderions",
+      "vous": "décideriez",
+      "ils": "décideraient"
+    },
+    "subjonctif_present": {
+      "je": "décide",
+      "tu": "décides",
+      "il": "décide",
+      "nous": "décidions",
+      "vous": "décidiez",
+      "ils": "décident"
+    }
+  },
+
+
+  "danser": {
+    "en": "to dance",
+    "level": ["A1"],
+    "aux": "avoir",
+    "pp": "dansé",
+    "present": {
+      "je": "danse",
+      "tu": "danses",
+      "il": "danse",
+      "nous": "dansons",
+      "vous": "dansez",
+      "ils": "dansent"
+    },
+    "imparfait": {
+      "je": "dansais",
+      "tu": "dansais",
+      "il": "dansait",
+      "nous": "dansions",
+      "vous": "dansiez",
+      "ils": "dansaient"
+    },
+    "future": {
+      "je": "danserai",
+      "tu": "danseras",
+      "il": "dansera",
+      "nous": "danserons",
+      "vous": "danserez",
+      "ils": "danseront"
+    },
+    "conditional": {
+      "je": "danserais",
+      "tu": "danserais",
+      "il": "danserait",
+      "nous": "danserions",
+      "vous": "danseriez",
+      "ils": "danseraient"
+    },
+    "subjonctif_present": {
+      "je": "danse",
+      "tu": "danses",
+      "il": "danse",
+      "nous": "dansions",
+      "vous": "dansiez",
+      "ils": "dansent"
+    }
+  },
+
+  "compter": {
+    "en": "to count",
+    "level": ["A1"],
+    "aux": "avoir",
+    "pp": "compté",
+    "present": {
+      "je": "compte",
+      "tu": "comptes",
+      "il": "compte",
+      "nous": "comptons",
+      "vous": "comptez",
+      "ils": "comptent"
+    },
+    "imparfait": {
+      "je": "comptais",
+      "tu": "comptais",
+      "il": "comptait",
+      "nous": "comptions",
+      "vous": "comptiez",
+      "ils": "comptaient"
+    },
+    "future": {
+      "je": "compterai",
+      "tu": "compteras",
+      "il": "comptera",
+      "nous": "compterons",
+      "vous": "compterez",
+      "ils": "compteront"
+    },
+    "conditional": {
+      "je": "compterais",
+      "tu": "compterais",
+      "il": "compterait",
+      "nous": "compterions",
+      "vous": "compteriez",
+      "ils": "compteraient"
+    },
+    "subjonctif_present": {
+      "je": "compte",
+      "tu": "comptes",
+      "il": "compte",
+      "nous": "comptions",
+      "vous": "comptiez",
+      "ils": "comptent"
+    }
+  },
+
+  "se_coucher": {
+    "en": "to go to bed",
+    "level": ["A1"],
+    "aux": "etre",
+    "pp": "couché",
+    "present": {
+      "je": "me couche",
+      "tu": "te couches",
+      "il": "se couche",
+      "nous": "nous couchons",
+      "vous": "vous couchez",
+      "ils": "se couchent"
+    },
+    "imparfait": {
+      "je": "me couchais",
+      "tu": "te couchais",
+      "il": "se couchait",
+      "nous": "nous couchions",
+      "vous": "vous couchiez",
+      "ils": "se couchaient"
+    },
+    "future": {
+      "je": "me coucherai",
+      "tu": "te coucheras",
+      "il": "se couchera",
+      "nous": "nous coucherons",
+      "vous": "vous coucherez",
+      "ils": "se coucheront"
+    },
+    "conditional": {
+      "je": "me coucherais",
+      "tu": "te coucherais",
+      "il": "se coucherait",
+      "nous": "nous coucherions",
+      "vous": "vous coucheriez",
+      "ils": "se coucheraient"
+    },
+    "subjonctif_present": {
+      "je": "me couche",
+      "tu": "te couches",
+      "il": "se couche",
+      "nous": "nous couchions",
+      "vous": "vous couchiez",
+      "ils": "se couchent"
+    }
+  }
 }
