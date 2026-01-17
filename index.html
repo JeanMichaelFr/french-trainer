@@ -105,6 +105,8 @@ select, button, input {
 <button onclick="toggleCheckFiles()">📁 Check file</button>
 <button onclick="toggleCheckWord()">🔎 Check word</button>
 <button onclick="toggleAllVerbs()">📖 All verbs</button>
+<button onclick="toggleEnFr()">🔁 EN-FR</button>
+
 
 
 
@@ -162,6 +164,10 @@ select, button, input {
             <div id="allVerbFr" style="font-size:26px; font-weight:bold"></div>
             <div id="allVerbEn" style="font-size:18px; color:#555"></div>
         </div>
+	<div style="margin-top:12px">
+    		<button onclick="toggleTestMode()" id="testBtn">🧪 TEST OFF</button>
+	</div>
+
 
         <button onclick="allVerbsNext()">R</button>
     </div>
@@ -262,6 +268,9 @@ let allVerbsTimer = null;
 let allVerbsList = [];
 let audioMode = "trainer";
 let sharedVerbIndex = 0; // used by BOTH main + all verbs
+let testMode = false;
+let waitingForTap = false;
+let pendingSpeech = null;
 
 
 
@@ -319,6 +328,52 @@ function toggleAllVerbs(){
     }
 }
 
+function toggleEnFr(){
+    unlockAudio();
+
+    allVerbsVisible = !allVerbsVisible;
+
+    const panel = document.getElementById("allVerbsPanel");
+    panel.style.display = allVerbsVisible ? "block" : "none";
+
+    if(allVerbsVisible){
+        audioMode = "enfr";
+
+        allVerbsList = Object.keys(VERBS);
+        sharedVerbIndex = verbIndex; // sync index
+
+        renderAllVerbs();
+        startAllVerbsLoop();
+    } else {
+        audioMode = "trainer";
+        stopAllVerbsLoop();
+        speechSynthesis.cancel();
+        updateQuestion();
+    }
+}
+
+
+
+// ------------------------------------
+// Toggle TEST mode
+// --------------------------------------
+
+function toggleTestMode(){
+    testMode = !testMode;
+    waitingForTap = false;
+    pendingSpeech = null;
+
+    document.getElementById("testBtn").textContent =
+        testMode ? "🧪 TEST ON" : "🧪 TEST OFF";
+
+    if(!testMode){
+        startAllVerbsLoop();
+    } else {
+        stopAllVerbsLoop();
+    }
+}
+
+
 
 
 // ------------------------------------
@@ -334,9 +389,30 @@ function renderAllVerbs(){
     document.getElementById("allVerbFr").textContent = verb;
     document.getElementById("allVerbEn").textContent = en;
 
+if(!testMode){
     if(audioMode === "allverbs"){
         speakBilingual(verb, en);
     }
+    if(audioMode === "enfr"){
+        speakBilingualReverse(en, verb);
+    }
+} else {
+    stopAllVerbsLoop();
+
+    if(audioMode === "allverbs"){
+        speak(verb); // FR first
+        pendingSpeech = () => speak(en);
+    }
+
+    if(audioMode === "enfr"){
+        speakEnglish(en); // EN first
+        pendingSpeech = () => speak(verb);
+    }
+
+    waitingForTap = true;
+}
+
+
 
     const prev = [];
     const next = [];
@@ -591,6 +667,36 @@ function speakBilingual(fr, en){
     speechSynthesis.speak(uFr);
     speechSynthesis.speak(uEn);
 }
+
+function speakBilingualReverse(en, fr){
+    if(!soundOn) return;
+
+    speechSynthesis.cancel();
+
+    const uEn = new SpeechSynthesisUtterance(en);
+    uEn.lang = "en-US";
+
+    const uFr = new SpeechSynthesisUtterance(fr);
+    uFr.lang = "fr-FR";
+
+    speechSynthesis.speak(uEn);
+    speechSynthesis.speak(uFr);
+}
+
+
+
+// =====================
+// Add helper for English speech
+// =====================
+
+function speakEnglish(text){
+    if(!soundOn) return;
+    speechSynthesis.cancel();
+    const u = new SpeechSynthesisUtterance(text);
+    u.lang = "en-US";
+    speechSynthesis.speak(u);
+}
+
 
 
 // =====================
@@ -1009,12 +1115,21 @@ document.addEventListener("pointerdown", function (e) {
     if (e.pointerType !== "touch") return;
     if (e.target.closest("button, input, select")) return;
 
+    if(testMode && waitingForTap && pendingSpeech){
+        pendingSpeech();
+        pendingSpeech = null;
+        waitingForTap = false;
+        setTimeout(allVerbsNext, 800);
+        return;
+    }
+
     if (e.clientX < window.innerWidth / 2) {
         prevVerb();
     } else {
         nextVerb();
     }
 });
+
 </script>
 
 <script>
@@ -1043,3 +1158,4 @@ document.getElementById("allVerbsPanel")
 
 </body>
 </html>
+
