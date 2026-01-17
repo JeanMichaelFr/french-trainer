@@ -469,7 +469,7 @@ function startAllVerbsLoop(){
     stopAllVerbsLoop();
     allVerbsTimer = setInterval(()=>{
         allVerbsNext();
-    }, 3000); // enough time for FR + EN
+    }, 4000); // enough time for FR + EN
 }
 
 
@@ -902,7 +902,7 @@ function toggleAutoCycle(){
     cycleBtn.textContent = autoCycle ? "🔁 Auto ON" : "🔁 Auto OFF";
 
     if(autoCycle){
-        cycleTimer = setInterval(cycleTense,3000);
+        cycleTimer = setInterval(cycleTense,4000);
     } else {
         clearInterval(cycleTimer);
     }
@@ -1158,4 +1158,5 @@ document.getElementById("allVerbsPanel")
 
 </body>
 </html>
+
 
